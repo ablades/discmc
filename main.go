@@ -151,8 +151,3 @@ func stopInstance(instance string) {
 
 	fmt.Println(result)
 }
-
-// Access Key ID:
-// AKIAJL4VUZZM7HZTM35A
-// Secret Access Key:
-// 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
