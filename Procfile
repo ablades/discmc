@@ -1,1 +1,1 @@
-web: ./discmc $PORT
+web: ./discmc
