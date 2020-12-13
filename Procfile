@@ -1,1 +1,1 @@
-web: bin/discmc
+program: bin/discmc
