@@ -22,11 +22,9 @@ var (
 )
 
 func init() {
-
-	// Set the file name of the configurations file
-	viper.SetConfigName("config")
-	viper.SetConfigType("yml")
 	viper.AddConfigPath(".")
+	viper.SetConfigName(".env")
+	viper.SetConfigType("env")
 	viper.AutomaticEnv()
 
 	if err := viper.ReadInConfig(); err != nil {
@@ -37,7 +35,7 @@ func init() {
 func createSession() *session.Session {
 	session, err := session.NewSession(&aws.Config{
 		Region:      aws.String("us-east-2"),
-		Credentials: credentials.NewStaticCredentials(viper.GetString("aws.accessid"), viper.GetString("aws.accesskey"), ""),
+		Credentials: credentials.NewStaticCredentials(viper.GetString("ACCESS_ID"), viper.GetString("ACCESS_KEY"), ""),
 	})
 	if err != nil {
 		log.Error(err)
@@ -49,7 +47,7 @@ func createSession() *session.Session {
 func main() {
 
 	// Create a new Discord session using the provided bot token.
-	dg, err := discordgo.New("Bot " + viper.GetString("bot.token"))
+	dg, err := discordgo.New("Bot " + viper.GetString("BOT_TOKEN"))
 	if err != nil {
 		fmt.Println("error creating Discord session,", err)
 		return
@@ -89,13 +87,13 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 	// If the message is "ping" reply with "Pong!"
 	if m.Content == "start mc" {
-		startInstance(viper.GetString("aws.instanceid"))
+		startInstance(viper.GetString("INSTANCE_ID"))
 		s.ChannelMessageSend(m.ChannelID, "Starting MC Server! IP is: 3.22.45.58")
 	}
 
 	// If the message is "pong" reply with "Ping!"
 	if m.Content == "stop mc" {
-		stopInstance(viper.GetString("aws.instanceid"))
+		stopInstance(viper.GetString("INSTANCE_ID"))
 		s.ChannelMessageSend(m.ChannelID, "Stopping MC Server!")
 	}
 }

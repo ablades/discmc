@@ -1,3 +1,4 @@
 merp-mc.pem
 config.yml
 bin/
+.env
