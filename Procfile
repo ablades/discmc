@@ -1,1 +1,1 @@
-web: ./discmc
+web: bin/discmc
