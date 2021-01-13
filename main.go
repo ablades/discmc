@@ -85,16 +85,19 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if m.Author.ID == s.State.User.ID {
 		return
 	}
+	
 	// If the message is "ping" reply with "Pong!"
 	if m.Content == "start mc" {
 		startInstance(viper.GetString("INSTANCE_ID"))
 		s.ChannelMessageSend(m.ChannelID, "Starting MC Server! IP is: 3.22.45.58")
+		s.ChannelMessageDelete(m.ChannelID, m.ID)
 	}
 
 	// If the message is "pong" reply with "Ping!"
 	if m.Content == "stop mc" {
 		stopInstance(viper.GetString("INSTANCE_ID"))
 		s.ChannelMessageSend(m.ChannelID, "Stopping MC Server!")
+		s.ChannelMessageDelete(m.ChannelID, m.ID)
 	}
 }
 
