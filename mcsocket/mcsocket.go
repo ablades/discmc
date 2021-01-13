@@ -1,0 +1,5 @@
+package mcsocket
+
+func main() {
+
+}
