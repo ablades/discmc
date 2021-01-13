@@ -1,4 +1,4 @@
-module github.com/ablades/discmc
+module github.com/ablades/discmc/discbot
 
 go 1.14
 
