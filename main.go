@@ -86,6 +86,18 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 	
+	guildID := m.GuildID
+	member, err := s.GuildMember(guildID, m.Author.ID)
+	if err != nil {
+		panic(err)
+	}
+
+	if len(member.Roles) == 0 || member.Roles[0] != "783617119325126666"{
+		s.ChannelMessageSend(m.ChannelID, "You're not a BIG BOI cant play mc with us")
+		return
+	}
+	
+
 	// If the message is "ping" reply with "Pong!"
 	if m.Content == "start mc" {
 		startInstance(viper.GetString("INSTANCE_ID"))
