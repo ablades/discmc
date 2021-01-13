@@ -92,10 +92,17 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		panic(err)
 	}
 
-	if len(member.Roles) == 0 || member.Roles[0] != "783617119325126666"{
+	if len(member.Roles) == 0 {
 		s.ChannelMessageSend(m.ChannelID, "You're not a BIG BOI cant play mc with us")
 		return
 	}
+	for x:=0; x<len(member.Roles); x++ {
+		if member.Roles[x] != "783617119325126666"{
+			s.ChannelMessageSend(m.ChannelID, "You're not a BIG BOI cant play mc with us")
+			return
+		}
+	}
+		
 	
 
 	// If the message is "ping" reply with "Pong!"
